@@ -1,0 +1,30 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateMealInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Meal {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Mutation {
+  createMeal(createMealInput: CreateMealInput!): Meal!
+  removeMeal(id: Int!): Meal!
+  updateMeal(updateMealInput: UpdateMealInput!): Meal!
+}
+
+type Query {
+  meal(id: Int!): Meal!
+  meals: [Meal!]!
+}
+
+input UpdateMealInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
