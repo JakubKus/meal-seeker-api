@@ -13,11 +13,13 @@ services:
     ports:
       - ${PG_PORT}:${PG_PORT}
 
-  meal-seeker:
+  meal-seeker-api:
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
+    volumes:
+      - .:/app
     environment:
       PG_USER: ${PG_USER}
       PG_PASSWORD: ${PG_PASSWORD}

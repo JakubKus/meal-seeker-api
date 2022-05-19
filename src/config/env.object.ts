@@ -4,6 +4,7 @@ enum ENV_KEY {
   PG_PASSWORD = 'PG_PASSWORD',
   PG_PORT = 'PG_PORT',
   PG_HOST = 'PG_HOST',
+  PG_LOCAL_HOST = 'PG_LOCAL_HOST',
   PORT = 'PORT',
 }
 
