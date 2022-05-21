@@ -2,10 +2,69 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Author {
-  id: Int!
+input AddMealInput {
+  name: String!
+  properties: MealPropsInput!
+}
+
+enum CaloriesEnum {
+  From100To300
+  LessThan100
+  MoreThan300
+}
+
+enum FlavorEnum {
+  Salty
+  Spicy
+  Sweet
+}
+
+enum MacrosEnum {
+  HighCarb
+  HighFat
+  HighProtein
+}
+
+type MealGql {
+  addedById: ID!
+  id: ID!
+  name: String!
+  properties: MealPropertiesGql!
+}
+
+type MealPropertiesGql {
+  calories: [CaloriesEnum!]!
+  flavor: [FlavorEnum!]!
+  macros: [MacrosEnum!]!
+  preparationTime: [PreparationTimeEnum!]!
+  temperature: [TemperatureEnum!]!
+}
+
+input MealPropsInput {
+  calories: [CaloriesEnum!]!
+  flavor: [FlavorEnum!]!
+  macros: [MacrosEnum!]!
+  preparationTime: [PreparationTimeEnum!]!
+  temperature: [TemperatureEnum!]!
+}
+
+type Mutation {
+  addMeal(addMealInput: AddMealInput!): ID!
+  deleteMeal(mealId: String!): ID!
+}
+
+enum PreparationTimeEnum {
+  From10To20
+  LessThan10
+  MoreThan10
 }
 
 type Query {
-  authors: [Author!]!
+  meal(mealId: String!): MealGql!
+  meals: [MealGql!]!
+}
+
+enum TemperatureEnum {
+  Cold
+  Hot
 }

@@ -1,10 +1,12 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { MealDeletedEvent } from '../meal-deleted.event';
+import { MealDeletedEvent } from '../impl/meal-deleted.event';
+import { MealRepository } from '../../repository/meal.repository';
 
 @EventsHandler(MealDeletedEvent)
 export class MealDeletedHandler implements IEventHandler<MealDeletedEvent> {
+  constructor(private readonly repository: MealRepository) {}
+
   handle(event: MealDeletedEvent) {
-    console.log('meal deleted:', event.mealId);
-    return [1, 2];
+    return this.repository.delete(event.mealId);
   }
 }

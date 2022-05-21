@@ -1,18 +1,18 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { MealAddedEvent } from '../events/meal-added.event';
-import { v4 as uuid } from 'uuid';
-import { MealDeletedEvent } from '../events/meal-deleted.event';
+import { MealAddedEvent } from '../events/impl/meal-added.event';
+import { MealDeletedEvent } from '../events/impl/meal-deleted.event';
+import { MealModelDto } from '../dtos/meal-model.dto';
 
-export class Meal extends AggregateRoot {
-  constructor(private readonly name: string) {
+export class MealModel extends AggregateRoot {
+  constructor(private readonly input: MealModelDto) {
     super();
   }
 
   create() {
-    this.apply(new MealAddedEvent(uuid(), this.name));
+    this.apply(new MealAddedEvent(this.input));
   }
 
-  delete(mealId: string) {
-    this.apply(new MealDeletedEvent(mealId));
+  delete() {
+    this.apply(new MealDeletedEvent(this.input.id));
   }
 }

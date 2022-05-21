@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Meal } from '../models/meal.model';
-import { Repository } from 'typeorm';
-import { MealEntity } from '../entities/meal.entity';
-import { v4 as uuid } from 'uuid';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Guid } from '@shared/value-objects/guid.value-object';
+import { Repository } from 'typeorm';
+import { MealEntity } from '../dtos/meal.entity';
+import { MealModelDto } from '../dtos/meal-model.dto';
 
 @Injectable()
 export class MealRepository {
@@ -12,22 +12,22 @@ export class MealRepository {
     private readonly repository: Repository<MealEntity>,
   ) {}
 
-  async create(name: string): Promise<void> {
-    const mealEntity = await this.repository.create({ name, dateAdded: new Date() });
+  async create(meal: MealModelDto) {
+    const { id, addedById } = meal;
+    // todo: create mapper
+    const mealEntity = await this.repository.create({ ...meal, id: id.value, addedById: addedById.value });
     await this.repository.save(mealEntity);
   }
 
-  async findOneById(id: string): Promise<Meal> {
-    const mealEntity = await this.repository.findOne(id);
-    return new Meal(mealEntity.name);
+  async findOneById(id: Guid): Promise<MealEntity> {
+    return this.repository.findOne(id.value);
   }
 
-  async findAll(): Promise<Meal[]> {
-    const mealEntities = await this.repository.find();
-    return mealEntities.map((entity) => new Meal(entity.name));
+  async findAll(): Promise<MealEntity[]> {
+    return this.repository.find();
   }
 
-  async delete(id: string): Promise<void> {
-    await this.repository.delete(id);
+  async delete(id: Guid): Promise<void> {
+    await this.repository.delete(id.value);
   }
 }
