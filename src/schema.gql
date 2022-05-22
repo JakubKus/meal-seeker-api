@@ -13,10 +13,21 @@ enum CaloriesEnum {
   MoreThan300
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 enum FlavorEnum {
   Salty
   Spicy
   Sweet
+}
+
+type HistoryGql {
+  addedDate: DateTime!
+  id: ID!
+  mealName: String!
 }
 
 enum MacrosEnum {
@@ -49,7 +60,9 @@ input MealPropsInput {
 }
 
 type Mutation {
+  addHistoryRecord(mealName: String!): ID!
   addMeal(addMealInput: AddMealInput!): ID!
+  deleteHistoryRecord(historyRecordId: String!): ID!
   deleteMeal(mealId: String!): ID!
 }
 
@@ -62,6 +75,7 @@ enum PreparationTimeEnum {
 type Query {
   meal(mealId: String!): MealGql!
   meals: [MealGql!]!
+  userHistory: [HistoryGql!]!
 }
 
 enum TemperatureEnum {

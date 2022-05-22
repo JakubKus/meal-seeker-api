@@ -1,11 +1,4 @@
-import {
-  CanActivate,
-  createParamDecorator,
-  ExecutionContext,
-  Injectable,
-  Module,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { CanActivate, createParamDecorator, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { promisify } from 'util';
 import * as jwt from 'express-jwt';
@@ -50,8 +43,3 @@ export const CurrentUserId = createParamDecorator((data: unknown, context: Execu
   const ctx = GqlExecutionContext.create(context);
   return ctx.getContext().req.user.sub;
 });
-
-@Module({
-  providers: [GqlAuthGuard],
-})
-export class GqlAuthModule {}

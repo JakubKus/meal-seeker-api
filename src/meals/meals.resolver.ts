@@ -8,7 +8,7 @@ import { MealEntity } from './dtos/meal.entity';
 import { DeleteMealCommand } from './commands/impl/delete-meal.command';
 import { GetMealByIdQuery } from './queries/impl/get-meal-by-id.query';
 import { UseGuards } from '@nestjs/common';
-import { CurrentUserId, GqlAuthGuard } from '../auth/gql.auth';
+import { CurrentUserId, GqlAuthGuard } from '../auth/gql-auth.guard';
 import { AddMealCommand } from './commands/impl/add-meal.command';
 
 @Resolver(() => MealGql)

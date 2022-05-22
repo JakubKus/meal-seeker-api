@@ -1,7 +1,7 @@
 import { ENV } from '@config/env.object';
 
 export const appConfig = () => ({
-  port: Number(ENV.PORT) || 5000,
+  port: Number(ENV.PORT) || 3001,
   postgres: {
     database: String(ENV.PG_DB),
     username: String(ENV.PG_USER),
