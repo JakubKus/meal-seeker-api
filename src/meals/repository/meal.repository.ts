@@ -13,9 +13,8 @@ export class MealRepository {
   ) {}
 
   async create(meal: MealModelDto) {
-    const { id, addedById } = meal;
     // todo: create mapper
-    const mealEntity = await this.repository.create({ ...meal, id: id.value, addedById: addedById.value });
+    const mealEntity = await this.repository.create({ ...meal, id: meal.id.value });
     await this.repository.save(mealEntity);
   }
 

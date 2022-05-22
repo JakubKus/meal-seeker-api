@@ -10,6 +10,10 @@ export const appConfig = () => ({
     localHost: String(ENV.PG_LOCAL_HOST),
     port: Number(ENV.PG_PORT) || 5432,
   },
+  auth0: {
+    audience: String(ENV.AUTH0_AUDIENCE),
+    domain: String(ENV.AUTH0_DOMAIN),
+  },
 });
 
 export type AppConfig = ReturnType<typeof appConfig>;

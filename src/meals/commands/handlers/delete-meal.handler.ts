@@ -14,7 +14,6 @@ export class DeleteMealHandler implements ICommandHandler<DeleteMealCommand> {
     const mealToDelete = new MealModel({
       ...mealEntity,
       id: new Guid(mealEntity.id),
-      addedById: new Guid(mealEntity.addedById),
     });
     const meal = this.publisher.mergeObjectContext(mealToDelete);
 

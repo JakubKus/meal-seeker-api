@@ -11,7 +11,7 @@ export class MealGql {
   name: string;
 
   @Field(() => ID)
-  addedById: GuidType;
+  addedById: string;
 
   @Field(() => MealPropertiesGql)
   properties: MealPropertiesGql;

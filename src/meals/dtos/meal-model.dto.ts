@@ -3,7 +3,7 @@ import { Guid } from '@shared/value-objects/guid.value-object';
 export interface MealModelDto {
   id: Guid;
   name: string;
-  addedById: Guid;
+  addedById: string;
   properties: MealModelPropertiesDto;
 }
 

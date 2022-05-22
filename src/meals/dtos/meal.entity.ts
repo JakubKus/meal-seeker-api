@@ -11,7 +11,7 @@ export class MealEntity {
   name: string;
 
   @Column()
-  addedById: GuidType;
+  addedById: string;
 
   @Column({ type: 'jsonb' })
   properties: MealModelPropertiesDto;
