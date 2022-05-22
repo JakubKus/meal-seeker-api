@@ -4,7 +4,7 @@ import { promisify } from 'util';
 import * as jwt from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
 import { ConfigService } from '@nestjs/config';
-import { AppConfig } from '@config/app.config';
+import { APP_CONFIG_KEY, AppConfig } from '@config/app.config';
 
 @Injectable()
 export class GqlAuthGuard implements CanActivate {
@@ -13,7 +13,7 @@ export class GqlAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context);
     const { req, res } = ctx.getContext();
-    const auth0Config = this.configService.get<AppConfig['auth0']>('auth0');
+    const auth0Config = this.configService.get<AppConfig[APP_CONFIG_KEY.AUTH0]>(APP_CONFIG_KEY.AUTH0);
 
     const checkJwt = promisify(
       // todo: upgrade jwt lib version

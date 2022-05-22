@@ -8,6 +8,8 @@ enum ENV_KEY {
   PORT = 'PORT',
   AUTH0_AUDIENCE = 'AUTH0_AUDIENCE',
   AUTH0_DOMAIN = 'AUTH0_DOMAIN',
+  DATABASE_URL = 'DATABASE_URL',
+  NODE_ENV = 'NODE_ENV',
 }
 
 export const ENV: Record<ENV_KEY, string | number> = process.env as Record<ENV_KEY, string | number>;

@@ -1,22 +1,38 @@
 import { DynamicModule } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
-import { AppConfig } from '@config/app.config';
+import { APP_CONFIG_KEY, AppConfig } from '@config/app.config';
 import typeormConfig from '@config/typeorm.config';
 
 export const typeormConfigModule = (): DynamicModule =>
   TypeOrmModule.forRootAsync({
-    useFactory: (config: ConfigService) => {
-      const postgresConfig = config.get<AppConfig['postgres']>('postgres');
-      return {
+    useFactory: (configService: ConfigService) => {
+      const postgresConfig = configService.get<AppConfig[APP_CONFIG_KEY.POSTGRES]>(APP_CONFIG_KEY.POSTGRES);
+      const environment = configService.get<AppConfig[APP_CONFIG_KEY.NODE_ENV]>(APP_CONFIG_KEY.NODE_ENV);
+
+      const prodConfig: TypeOrmModuleOptions = {
         ...typeormConfig,
         type: 'postgres',
-        host: postgresConfig.host,
+        database: postgresConfig.database,
+        url: postgresConfig.url,
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
+      };
+      const devConfig: TypeOrmModuleOptions = {
+        ...typeormConfig,
+        type: 'postgres',
+        host: postgresConfig.localHost, // use host for docker compose and localHost for running app locally
         port: postgresConfig.port,
         username: postgresConfig.username,
         password: postgresConfig.password,
         database: postgresConfig.database,
       };
+
+      return environment === 'PROD' ? prodConfig : devConfig;
     },
     inject: [ConfigService],
   });

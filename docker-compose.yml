@@ -16,7 +16,7 @@ services:
   meal-seeker-api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: src/config/Dockerfile.dev
     restart: always
     volumes:
       - .:/app
