@@ -18,7 +18,7 @@ export interface MealModelPropertiesDto {
 export enum PreparationTimeEnum {
   LessThan10 = 'LessThan10',
   From10To20 = 'From10To20',
-  MoreThan10 = 'MoreThan10',
+  MoreThan20 = 'MoreThan20',
 }
 
 export enum TemperatureEnum {
