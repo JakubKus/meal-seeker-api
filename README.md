@@ -26,37 +26,53 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## 1. Installation
 
 ```bash
+# for now this api is using node 14
+$ nvm use 14
+# install dependencies locally
 $ npm install
 ```
 
-## Running the app
+## 2. Running the app
+### 2.1 On fully dockerized environment
 
 ```bash
-# development
+# prepare docker environment
+$ docker-compose up
+```
+
+### 2.2 Or on local environment with db in docker
+
+- Go to `src/config/modules/typeorm.config.module.ts`
+- Change `host` value to `postgresConfig.localhost`
+
+```bash
+# build postgres db in docker
+$ docker-compose up --build meal-seeker-pg
+```
+    
+```bash
+# run the app locally
 $ npm run start
-
-# watch mode
+```
+    
+```bash
+# or run the app in watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## 3. Initialize empty database
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# run migrations to initialize db
+$ npm run typeorm schema:sync
 ```
+
+## 4. Open playground
+- Go to http://localhost:3001/graphql
+
 
 ## Support
 
