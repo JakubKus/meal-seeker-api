@@ -3,7 +3,7 @@ import { ENV } from '@config/env.object';
 
 const typeormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: String(ENV.PG_LOCAL_HOST),
+  host: String(ENV.PG_LOCALHOST),
   port: Number(ENV.PG_PORT) || 5432,
   username: String(ENV.PG_USER),
   password: String(ENV.PG_PASSWORD),

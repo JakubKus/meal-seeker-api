@@ -25,7 +25,7 @@ export const typeormConfigModule = (): DynamicModule =>
       const devConfig: TypeOrmModuleOptions = {
         ...typeormConfig,
         type: 'postgres',
-        host: postgresConfig.localHost, // use host for docker compose and localHost for running app locally
+        host: postgresConfig.localhost, // use host for docker compose and localhost for running app locally
         port: postgresConfig.port,
         username: postgresConfig.username,
         password: postgresConfig.password,

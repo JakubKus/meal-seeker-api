@@ -15,7 +15,7 @@ export const appConfig = () => ({
     username: String(ENV.PG_USER),
     password: String(ENV.PG_PASSWORD),
     host: String(ENV.PG_HOST),
-    localHost: String(ENV.PG_LOCAL_HOST),
+    localhost: String(ENV.PG_LOCALHOST),
     port: Number(ENV.PG_PORT) || 5432,
     url: String(ENV.DATABASE_URL),
   },
