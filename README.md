@@ -36,21 +36,21 @@ $ npm install && npm run build
 ```
 
 ## 2. Running the app
-### 2.1 On fully dockerized environment
+### A) On fully dockerized environment
 
 ```bash
 # prepare docker environment
 $ docker-compose up
 ```
 
-### 2.2 Or on local environment with db in docker
+### B) Or on local environment with db in docker
 
 - Go to `src/config/modules/typeorm.config.module.ts`
 - Change `host` value to `postgresConfig.localhost`
 
 ```bash
 # build postgres db in docker
-$ docker-compose up --build meal-seeker-pg
+$ docker-compose up --build pg
 ```
 
 ```bash
@@ -59,12 +59,7 @@ $ npm run migration-local:run
 ```
     
 ```bash
-# run the app locally
-$ npm run start
-```
-    
-```bash
-# or run the app in watch mode
+# start app
 $ npm run start:dev
 ```
 
