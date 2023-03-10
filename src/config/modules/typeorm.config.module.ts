@@ -2,7 +2,7 @@ import { DynamicModule } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { APP_CONFIG_KEY, AppConfig } from '@config/app.config';
-import typeormConfig from '@config/typeorm.config';
+import typeormConfig from '@config/typeorm-local.config';
 
 export const typeormConfigModule = (): DynamicModule =>
   TypeOrmModule.forRootAsync({
@@ -25,7 +25,7 @@ export const typeormConfigModule = (): DynamicModule =>
       const devConfig: TypeOrmModuleOptions = {
         ...typeormConfig,
         type: 'postgres',
-        host: postgresConfig.localhost, // use host for docker compose and localhost for running app locally
+        host: postgresConfig.host, // use host for docker compose and localhost for running app locally
         port: postgresConfig.port,
         username: postgresConfig.username,
         password: postgresConfig.password,
