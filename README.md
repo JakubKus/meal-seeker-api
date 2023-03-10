@@ -32,7 +32,7 @@
 # for now this api is using node 14
 $ nvm use 14
 # install dependencies locally
-$ npm install
+$ npm install && npm run build
 ```
 
 ## 2. Running the app
@@ -52,6 +52,11 @@ $ docker-compose up
 # build postgres db in docker
 $ docker-compose up --build meal-seeker-pg
 ```
+
+```bash
+# run migrations to initialize db
+$ npm run migration-local:run
+```
     
 ```bash
 # run the app locally
@@ -63,14 +68,7 @@ $ npm run start
 $ npm run start:dev
 ```
 
-## 3. Initialize empty database
-
-```bash
-# run migrations to initialize db
-$ npm run typeorm schema:sync
-```
-
-## 4. Open playground
+## 3. Open playground
 - Go to http://localhost:3001/graphql
 
 
