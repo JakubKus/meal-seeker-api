@@ -12,6 +12,11 @@ services:
       POSTGRES_DB: ${PG_DB}
     ports:
       - ${PG_PORT}:${PG_PORT}
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', $PG_USER, '-d', $PG_DB]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   meal-seeker-api:
     build:
@@ -29,8 +34,10 @@ services:
       PORT: ${PORT}
     ports:
       - ${PORT}:${PORT}
+    entrypoint: ['/bin/sh', './entrypoint.sh']
     depends_on:
-      - meal-seeker-pg
+      meal-seeker-pg:
+        condition: service_healthy
 
 volumes:
   pg_data: {}
